@@ -236,6 +236,53 @@
   }
   .answer .line{width:100%;border-bottom:3px solid var(--ink);margin:7px 0}
 
+  .wholeFinalGroup{
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    gap:10px;
+    min-height:132px;
+  }
+  .wholeFinalGroup.show{display:flex;animation:floatIn .35s ease 1;}
+  .wholeFinalGroup .symbol{padding-bottom:25px;}
+  .wholeAnswer{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-width:74px;
+    padding:7px 10px;
+    border-radius:14px;
+    background:#fff7ed;
+    border:2px solid #fed7aa;
+    box-shadow:0 14px 22px rgba(15,23,42,.06), inset 0 -2px 0 rgba(0,0,0,.03);
+  }
+  .wholeAnswer input{
+    width:52px;
+    border:2px solid var(--line);
+    border-radius:11px;
+    padding:7px 8px;
+    text-align:center;
+    font-size:22px;
+    font-weight:1000;
+    background:#fff;
+  }
+  .wholeAssistBtn{
+    margin-top:6px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:linear-gradient(180deg,#f97316,#ea580c);
+    color:#fff;
+    font-size:12px;
+    font-weight:1000;
+    box-shadow:0 8px 14px rgba(234,88,12,.16);
+    white-space:nowrap;
+  }
+  .wholeAssistBtn:disabled{opacity:.45;cursor:not-allowed}
+  .equationRow.wholeFinalOn{
+    grid-template-columns:150px 36px 150px 36px 122px 116px;
+    column-gap:12px;
+  }
+
   .middleArea{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:24px}
   .viz{width:min(100%,440px);min-height:40px}
   .workbox{
@@ -254,6 +301,8 @@
   }
   .minifrac .top{width:100%;border-bottom:2px solid var(--ink);text-align:center}
   .minifrac .bottom{padding-top:1px;font-size:13px}
+  .miniwhole{display:inline-flex;align-items:center;justify-content:center;min-width:42px;padding:4px 9px;border-radius:9px;background:var(--cream);font-weight:1000;}
+  .wholeOnly{color:#9a3412;font-weight:1000;}
   .arrow{color:var(--purple);font-weight:1000}
   .barlabel{margin-top:6px;color:var(--muted);text-align:center;font-size:13px;font-weight:900}
   .legendRow{display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;margin-top:10px}
@@ -312,7 +361,7 @@
   }
 
   .status{margin-top:6px;min-height:1.2em;text-align:center;font-weight:1000}
-  .ok{color:var(--good)} .no{color:var(--bad)}
+  .ok{color:var(--good)} .no{color:var(--bad)} .info{color:var(--purple)} .info{color:var(--purple)}
 
   .controls{
     display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
@@ -441,6 +490,92 @@
     .workbox{max-width:330px}
     .controls{padding-top:18px}
   }
+
+
+  /* Fit-to-screen polish: keep the whole activity inside the viewport without page scrolling. */
+  html, body{height:100%;max-width:100%;overflow:hidden;}
+  body{min-height:100dvh;display:grid;grid-template-rows:auto 1fr auto;}
+  header{width:100%;margin:clamp(4px,1vh,10px) auto 0;padding:0 clamp(8px,2vw,18px);}
+  h1{font-size:clamp(18px,3.2vw,28px);margin:0 0 2px;}
+  .note{font-size:clamp(11px,1.7vw,15px);line-height:1.25;margin-bottom:4px;}
+  .meta{gap:6px;font-size:clamp(11px,1.8vw,14px);}
+  #scoreBox,#scoreNote{padding:2px 8px;}
+  main{width:100%;height:100%;min-height:0;display:flex;margin:clamp(4px,1vh,10px) auto 0;padding:0 clamp(6px,1.8vw,16px);}
+  .card{width:100%;height:100%;min-height:0;overflow:hidden;padding:clamp(8px,2vh,18px) clamp(8px,2vw,22px) clamp(8px,1vh,14px);border-radius:clamp(12px,3vw,22px);}
+  .stage{font-size:clamp(10px,1.8vw,13px);padding:4px 10px;}
+  .modeBar{margin-top:clamp(4px,1vh,10px);padding:4px;gap:5px;}
+  .modeBtn{font-size:clamp(10px,1.7vw,13px);padding:5px 9px;}
+  .equationDeck{max-width:min(860px,100%);margin-top:clamp(10px,4vh,46px);}
+  .equationRow{grid-template-columns:minmax(76px,1fr) 22px minmax(76px,1fr) 22px minmax(72px,.75fr);column-gap:clamp(2px,1vw,12px);min-height:clamp(88px,18vh,135px);}
+  .equationRow.wholeFinalOn{grid-template-columns:minmax(58px,.85fr) 16px minmax(58px,.85fr) 16px minmax(58px,.70fr) minmax(62px,.55fr);column-gap:clamp(1px,.5vw,5px);}
+  .equationItem{min-height:clamp(82px,16vh,122px);}
+  .symbol{font-size:clamp(20px,5vw,30px);padding-bottom:clamp(13px,4vh,24px);}
+  .tag{height:auto;font-size:clamp(8px,1.6vw,12px);padding:2px 6px;max-width:100%;}
+  .fracWrap{gap:clamp(4px,1vh,9px);}
+  .fracGroup{min-width:0;gap:clamp(2px,.7vw,8px);}
+  .factorStack{width:clamp(24px,6vw,48px);font-size:clamp(11px,2.7vw,18px);gap:clamp(12px,3vh,18px);}
+  .frac{min-width:clamp(50px,13vw,86px);padding:clamp(4px,1vw,8px) clamp(5px,1.5vw,12px);}
+  .frac .num{font-size:clamp(16px,4vw,23px);border-bottom-width:2px;}
+  .frac .den{font-size:clamp(14px,3.5vw,19px);}
+  .answer{min-width:clamp(60px,17vw,110px);padding:4px 6px;}
+  .answer input{width:clamp(50px,14vw,92px);padding:5px 5px;font-size:clamp(14px,3.7vw,20px);}
+  .answer .line{margin:5px 0;border-bottom-width:2px;}
+  .wholeFinalGroup{min-height:clamp(82px,16vh,122px);gap:clamp(2px,.6vw,8px);}
+  .wholeFinalGroup .symbol{font-size:clamp(18px,4.5vw,28px);padding-bottom:clamp(13px,4vh,24px);}
+  .wholeAnswer{min-width:clamp(46px,12vw,72px);padding:4px 5px;}
+  .wholeAnswer input{width:clamp(38px,10vw,52px);padding:5px 4px;font-size:clamp(14px,3.7vw,20px);}
+  .wholeAssistBtn{font-size:clamp(9px,2.4vw,12px);padding:4px 7px;margin-top:4px;}
+  .equationLine{border-bottom-width:clamp(3px,.8vw,6px);margin:clamp(4px,1vh,10px) auto 0;}
+  .middleArea{margin-top:clamp(6px,2vh,20px);gap:4px;min-height:0;}
+  .viz{width:100%;max-width:440px;min-height:0;}
+  .workbox{max-width:min(440px,100%);padding:clamp(8px,1.8vh,13px);border-radius:14px;}
+  .worktitle{font-size:clamp(13px,2.6vw,16px);margin-bottom:3px;}
+  .workhint{font-size:clamp(11px,2.3vw,14px);margin:3px 0 5px;}
+  .minirow{margin:2px 0;gap:5px;}
+  .barlabel{font-size:clamp(10px,2.1vw,13px);margin-top:3px;}
+  .legendRow{gap:10px;margin-top:5px;}
+  .legendItem{font-size:clamp(10px,2vw,13px);}
+  .status{font-size:clamp(12px,2.3vw,16px);min-height:1em;margin-top:2px;}
+  .controls{padding-top:clamp(6px,1.6vh,18px);gap:7px;}
+  button{padding:clamp(7px,1.5vh,11px) clamp(9px,2vw,17px);font-size:clamp(12px,2.3vw,15px);border-radius:11px;}
+  footer{margin:0 auto 4px!important;padding:0 8px!important;font-size:clamp(9px,1.7vw,12px);line-height:1.1;}
+
+  @media (max-height:680px){
+    .note{display:none;}
+    .equationDeck{margin-top:8px;}
+    .legendRow{display:none;}
+    .workbox{padding:7px;}
+    .modeBar{margin-top:4px;}
+    header{margin-top:4px;}
+    .card{padding-top:7px;}
+  }
+
+  @media (max-height:560px){
+    footer{display:none;}
+    h1{font-size:16px;}
+    .meta{display:none;}
+    .stage{display:none;}
+    .equationLine{display:none;}
+    .workbox svg{height:32px;}
+  }
+
+  @media (max-width:380px){
+    .tag{display:none;}
+    .equationRow{grid-template-columns:minmax(60px,1fr) 16px minmax(60px,1fr) 16px minmax(56px,.8fr);column-gap:1px;}
+    .equationRow.wholeFinalOn{grid-template-columns:minmax(46px,.9fr) 12px minmax(46px,.9fr) 12px minmax(44px,.7fr) minmax(48px,.55fr);}
+    .answer input{width:48px;}
+    .wholeAnswer input{width:34px;}
+    .wholeAssistBtn{font-size:9px;padding:3px 5px;}
+    .modeBtn{padding:4px 6px;}
+  }
+
+  @media (max-height:480px){
+    .modeBar{display:none;}
+    .middleArea{margin-top:4px;}
+    .controls{padding-top:4px;}
+    .workbox{max-height:105px;overflow:hidden;}
+  }
+
 </style>
 <script src="https://cdn.counter.dev/script.js" data-id="825e93b6-ce99-40ef-8bcc-125f13297433" data-utcoffset="8"></script>
 </head>
@@ -448,7 +583,7 @@
 <div class="confettiLayer" id="confettiLayer" aria-hidden="true"></div>
 <header>
   <h1>Adding of Unlike Fractions</h1>
-  <div class="note">Only one denominator needs to be changed. Fractions are proper. Answer must be ≤ 1 (enter <b>1/1</b> for a whole if needed).</div>
+  <div class="note">Only one denominator needs to be changed. Fractions are proper. Answer must be ≤ 1. If a fraction becomes <b>1/1</b>, use the next <b>=</b> box to write <b>1</b>.</div>
   <div class="meta">
     <div id="progress">Question 1 of 10</div>
     <div id="scoreBox">Completed: <span id="score">0</span>/10</div>
@@ -467,7 +602,7 @@
     </div>
 
     <section class="equationDeck" aria-label="fraction equation">
-      <div class="equationRow">
+      <div class="equationRow" id="equationRow">
         <div class="equationItem">
           <div class="fracWrap">
             <div class="tag"><span class="dot blueDot"></span>First fraction</div>
@@ -503,6 +638,17 @@
             <input id="inN" type="number" min="0" step="1" inputmode="numeric" placeholder="nume">
             <div class="line"></div>
             <input id="inD" type="number" min="1" step="1" inputmode="numeric" placeholder="deno">
+          </div>
+        </div>
+
+        <div class="wholeFinalGroup" id="wholeFinalGroup" aria-hidden="true">
+          <div class="symbol" aria-hidden="true">=</div>
+          <div class="fracWrap">
+            <div class="tag">Simplest form</div>
+            <div class="wholeAnswer" aria-label="type the whole number answer">
+              <input id="inWhole" type="number" min="0" step="1" inputmode="numeric" placeholder="1" disabled>
+            </div>
+            <button id="useWholeOne" type="button" class="wholeAssistBtn" disabled>Put 1</button>
           </div>
         </div>
       </div>
@@ -584,12 +730,25 @@
     return svg;
   }
 
-  function smallFrac(n,d){
+  function formatAnswerText(n,d){
+    return d === 1 ? String(n) : `${n}/${d}`;
+  }
+
+  function smallWhole(n){
+    return `<span class="miniwhole">${n}</span>`;
+  }
+
+  function smallFracRaw(n,d){
     return `<span class="minifrac"><span class="top">${n}</span><span class="bottom">${d}</span></span>`;
   }
 
+  function smallFrac(n,d){
+    if(d === 1) return smallWhole(n);
+    return smallFracRaw(n,d);
+  }
+
   function smallFracWithDiv(n,d,k){
-    return `<span class="miniFracWithMarks">${smallFrac(n,d)}<span class="divMarks"><span>÷ ${k}</span><span>÷ ${k}</span></span></span>`;
+    return `<span class="miniFracWithMarks">${smallFracRaw(n,d)}<span class="divMarks"><span>÷ ${k}</span><span>÷ ${k}</span></span></span>`;
   }
 
 
@@ -597,10 +756,18 @@
     const g = q.simplifyFactor;
     const box=document.createElement('div');
     box.className='workbox';
+    const target = formatAnswerText(q.ansN, q.ansD);
+    const simplifiedVisual = q.ansD === 1
+      ? `${smallFracRaw(q.ansN, q.ansD)} <span class="arrow">=</span> ${smallWhole(q.ansN)}`
+      : smallFrac(q.ansN, q.ansD);
+    const wholeReminder = q.ansD === 1
+      ? `<div class="barlabel wholeOnly">${smallFracRaw(q.ansN, q.ansD)} means one whole. The simplest way to write it is <b>1</b>.</div>`
+      : '';
     box.innerHTML=`
       <div class="worktitle">Simplify the answer</div>
-      <div class="workhint">${smallFracWithDiv(q.total, q.commonD, g)} <span class="arrow">→</span> ${smallFrac(q.ansN, q.ansD)}</div>
+      <div class="workhint">${smallFracWithDiv(q.total, q.commonD, g)} <span class="arrow">→</span> ${simplifiedVisual}</div>
       <div class="barlabel">Now simplify. Divide the numerator and denominator by <span style="color:var(--bad);font-weight:1000;">${g}</span>.</div>
+      ${wholeReminder}
     `;
     const mini=document.createElement('div');
     mini.className='minirow';
@@ -612,7 +779,9 @@
 
     const badge = document.createElement('div');
     badge.className='minirow';
-    badge.innerHTML = `<span class="simplifyPrompt">Type the simplest form: ${q.ansN}/${q.ansD}</span>`;
+    badge.innerHTML = q.ansD === 1
+      ? `<span class="simplifyPrompt">After the second =, type the simplest form: ${target}</span>`
+      : `<span class="simplifyPrompt">Type the simplest form: ${target}</span>`;
     box.appendChild(badge);
 
     const legend=document.createElement('div');
@@ -665,6 +834,7 @@
   let score = 0;
   let stepMode = 0; // 0 first fraction, 1 show change, 2 equivalent fractions, 3 answer, 4 simplified answer
   let awaitingSimplify = false;
+  let wholeFinalActive = false;
   let questionCompleted = false;
   let mode = 'learn';
   let audioCtx = null;
@@ -799,14 +969,37 @@
     if(mode === nextMode) return;
     mode = nextMode;
     awaitingSimplify = false;
+    wholeFinalActive = false;
+    setWholeFinalVisible(false);
     questionCompleted = false;
     idx = 0;
     score = 0;
     questions = buildSet(10);
+    qs('#check').disabled = false;
+    qs('#next').disabled = false;
+    qs('#skip').disabled = false;
+    qs('#back').disabled = true;
+    const sum = qs('#summary');
+    if(sum){ sum.style.display = 'none'; sum.innerHTML = ''; }
     refreshScore();
     updateModeButtons();
     showQuestion();
   }
+
+  function setWholeFinalVisible(show){
+    const row = qs('#equationRow');
+    const group = qs('#wholeFinalGroup');
+    const input = qs('#inWhole');
+    const useBtn = qs('#useWholeOne');
+    if(!row || !group || !input) return;
+    row.classList.toggle('wholeFinalOn', !!show);
+    group.classList.toggle('show', !!show);
+    group.setAttribute('aria-hidden', show ? 'false' : 'true');
+    input.disabled = !show;
+    if(useBtn) useBtn.disabled = !show;
+    if(!show) input.value = '';
+  }
+
 
   function playNoticeSound(){
     try{
@@ -948,9 +1141,16 @@
 
   function showQuestion(){
     const q = questions[idx];
+    qs('#check').disabled = false;
+    qs('#next').disabled = false;
+    qs('#skip').disabled = false;
+    qs('#back').disabled = true;
     qs('#progress').textContent = `Question ${idx+1} of ${questions.length}`;
     qs('#inN').value='';
     qs('#inD').value='';
+    qs('#inWhole').value='';
+    wholeFinalActive = false;
+    setWholeFinalVisible(false);
     const st=qs('#status');
     st.textContent=' ';
     st.className='status';
@@ -988,34 +1188,114 @@
     setTimeout(nextQuestion, 1500);
   }
 
+  function showSimplifyPrompt(q, message, activateWholeFinal=false){
+    awaitingSimplify = true;
+    wholeFinalActive = activateWholeFinal && q.ansD === 1;
+    stepMode = 4;
+    renderSteps(q);
+    setWholeFinalVisible(wholeFinalActive);
+    const st=qs('#status');
+    st.textContent = message;
+    st.className = 'status info';
+    updateScoreNote();
+    if(wholeFinalActive){
+      qs('#inWhole').value='';
+      qs('#inWhole').focus();
+    } else {
+      qs('#inN').focus();
+    }
+  }
+
+  function fillWholeOne(){
+    const q = questions[idx];
+    const st = qs('#status');
+    if(!q || q.ansD !== 1 || !wholeFinalActive) return;
+    qs('#inWhole').value = String(q.ansN);
+    st.textContent = 'Good. Now the final answer is written as 1. Press Check Answer.';
+    st.className = 'status info';
+    qs('#inWhole').focus();
+  }
+
   function checkAnswer(){
     const q = questions[idx];
     const st=qs('#status');
-    const n = Number(qs('#inN').value);
-    const d = Number(qs('#inD').value);
+    const nRaw = qs('#inN').value.trim();
+    const dRaw = qs('#inD').value.trim();
+    const wRaw = qs('#inWhole').value.trim();
+    const wholeAnswerRequired = q.ansD === 1;
 
-    if(!Number.isInteger(n) || !Number.isInteger(d) || d<=0){
-      st.textContent='Enter whole numbers (n/d).';
+    if(awaitingSimplify && wholeAnswerRequired && wholeFinalActive){
+      if(wRaw === ''){
+        st.textContent='Type 1 after the second equal sign.';
+        st.className='status info';
+        return;
+      }
+      const w = Number(wRaw);
+      if(Number.isInteger(w) && w === q.ansN){
+        finalCorrect();
+      } else {
+        st.textContent='One whole is written as 1.';
+        st.className='status no';
+      }
+      return;
+    }
+
+    if(nRaw === ''){
+      st.textContent='Enter your answer.';
       st.className='status no';
       return;
     }
 
-    if(n<0 || n>d || (d!==1 && (d<2 || d>12))){
-      st.textContent='Answer must be ≤ 1 with denominator 2–12, or 1/1 for a whole.';
+    const n = Number(nRaw);
+    const d = dRaw === '' ? 1 : Number(dRaw);
+    const typedAsWhole = dRaw === '' && wholeAnswerRequired && n === q.ansN;
+
+    if(!Number.isInteger(n) || n < 0){
+      st.textContent='Enter a whole number for the numerator.';
+      st.className='status no';
+      return;
+    }
+
+    if(dRaw !== '' && (!Number.isInteger(d) || d <= 0)){
+      st.textContent='Enter a whole number for the denominator.';
+      st.className='status no';
+      return;
+    }
+
+    if(dRaw === '' && !typedAsWhole){
+      st.textContent='Enter the denominator too, unless the simplest answer is a whole number.';
       st.className='status no';
       return;
     }
 
     const [sn,sd]=simplifyPair(n,d);
     const isEquivalentAnswer = (sn===q.ansN && sd===q.ansD);
-    const isSimplestAnswer = (n===q.ansN && d===q.ansD);
+
+    if(wholeAnswerRequired && dRaw !== '' && isEquivalentAnswer){
+      showSimplifyPrompt(q, 'Good — this is one whole. Use the second = box to write the simplest form: 1.', true);
+      return;
+    }
+
+    if(dRaw !== '' && (n > d || d < 2 || d > 12)){
+      st.textContent='Answer must be ≤ 1 with denominator 2–12, unless it simplifies to 1 whole.';
+      st.className='status no';
+      return;
+    }
+
+    const isSimplestAnswer = wholeAnswerRequired
+      ? typedAsWhole
+      : (n===q.ansN && d===q.ansD);
 
     if(mode === 'challenge'){
       if(isSimplestAnswer){
         finalCorrect();
       } else if(isEquivalentAnswer){
-        st.textContent='Correct value, but Challenge Mode needs simplest form.';
-        st.className='status no';
+        if(wholeAnswerRequired && dRaw !== ''){
+          showSimplifyPrompt(q, 'Correct value. Now write the whole number after the second equal sign.', true);
+        } else {
+          st.textContent='Correct value. Now give it in simplest form.';
+          st.className='status info';
+        }
       } else {
         st.textContent='Try again';
         st.className='status no';
@@ -1027,8 +1307,12 @@
       if(isSimplestAnswer){
         finalCorrect();
       } else if(isEquivalentAnswer){
-        st.textContent='Almost there. Simplify it for the point.';
-        st.className='status no';
+        if(wholeAnswerRequired && dRaw !== ''){
+          showSimplifyPrompt(q, 'Almost there. Use the extra = box to write 1.', true);
+        } else {
+          st.textContent='Almost there. Use the simplest form for the point.';
+          st.className='status info';
+        }
       } else {
         st.textContent='Try simplifying the correct answer.';
         st.className='status no';
@@ -1040,12 +1324,7 @@
       if(isSimplestAnswer){
         finalCorrect();
       } else {
-        awaitingSimplify = true;
-        stepMode = 4;
-        renderSteps(q);
-        st.textContent='Correct addition. Now simplify for the point.';
-        st.className='status ok';
-        updateScoreNote();
+        showSimplifyPrompt(q, 'Correct value. Now simplify it for the point.');
         qs('#inN').value='';
         qs('#inD').value='';
         qs('#inN').focus();
@@ -1060,6 +1339,8 @@
     idx++;
     questionCompleted = false;
     awaitingSimplify = false;
+    wholeFinalActive = false;
+    setWholeFinalVisible(false);
     qs('#check').disabled = false;
     qs('#next').disabled = false;
     qs('#skip').disabled = false;
@@ -1080,7 +1361,11 @@
   function nextStep(){
     if(mode === 'challenge') return;
     stepMode = (stepMode + 1) % 5;
-    if(stepMode !== 4) awaitingSimplify = false;
+    if(stepMode !== 4){
+      awaitingSimplify = false;
+      wholeFinalActive = false;
+      setWholeFinalVisible(false);
+    }
     renderSteps(questions[idx]);
   }
 
@@ -1088,6 +1373,8 @@
     if(stepMode > 0){
       stepMode -= 1;
       awaitingSimplify = false;
+      wholeFinalActive = false;
+      setWholeFinalVisible(false);
       renderSteps(questions[idx]);
     }
   }
@@ -1095,6 +1382,8 @@
   qs('#check').addEventListener('click', checkAnswer);
   qs('#inN').addEventListener('keydown', e=>{ if(e.key==='Enter') checkAnswer(); });
   qs('#inD').addEventListener('keydown', e=>{ if(e.key==='Enter') checkAnswer(); });
+  qs('#inWhole').addEventListener('keydown', e=>{ if(e.key==='Enter') checkAnswer(); });
+  qs('#useWholeOne').addEventListener('click', fillWholeOne);
   qs('#next').addEventListener('click', nextStep);
   qs('#back').addEventListener('click', backStep);
   qs('#skip').addEventListener('click', ()=> nextQuestion());
